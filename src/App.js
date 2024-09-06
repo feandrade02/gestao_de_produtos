@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import Header from './components/layout/Header';
 import Login from './components/pages/Login';
+import Header from './components/layout/Header';
+import Navbar from './components/layout/Navbar'
 
 function App() {
   return (
     <div>
-      <Header/>
-      <Login />
+       <Header />
+       <Navbar />
+       <Login />
     </div>
   );
 }
