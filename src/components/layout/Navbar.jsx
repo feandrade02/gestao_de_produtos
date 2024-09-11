@@ -2,23 +2,22 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import HomeIcon from '@mui/icons-material/Home';
+import LayersIcon from '@mui/icons-material/Layers';
+import SettingsIcon from '@mui/icons-material/Settings';
+
 
 const drawerWidth = 240;
 
 export default function PermanentDrawerLeft() {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex'}}>
       <CssBaseline />
       <Drawer
         sx={{
@@ -27,32 +26,22 @@ export default function PermanentDrawerLeft() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            marginTop: '5em'
           },
         }}
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
-        <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Dashboard', 'Sistema de Gestão', 'Parâmetros'].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {
+                    (text === 'Dashboard' && <HomeIcon />) ||
+                    (text === 'Sistema de Gestão' && <LayersIcon />) ||
+                    (text === 'Parâmetros' && <SettingsIcon />)
+                  }
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
