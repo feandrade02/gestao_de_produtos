@@ -1,14 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Login from './components/pages/Login';
-import Navbar from './components/layout/Navbar'
+import PaginaBase from './components/PaginaBase'
 
 function App() {
   return (
-    <div>
-       <Navbar />
-       <Login />
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/paginabase' element={<PaginaBase />} />
+      </Routes>
+    </Router>
   );
 }
 

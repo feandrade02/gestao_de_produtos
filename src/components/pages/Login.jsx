@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, CssBaseline, TextField, Paper, Box, Grid2, Typography } from '@mui/material';
+import { Button, CssBaseline, TextField, Paper, Box, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LoginIcon from '@mui/icons-material/Login';
+import { Link } from 'react-router-dom';
 
 import Logo from '../../img/logo_teste.png'
-import Header from '../layout/Header';
 
 const theme = createTheme();
 
@@ -20,26 +20,25 @@ export default function Login() {
       };
 
     return(
-        <>
-          <Header />
-          <ThemeProvider theme={theme}>
-            <Grid2 container component="main" sx={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',}}>
-            <CssBaseline />
-            <Grid2 
-              item 
-              xs={12} 
-              sm={8} 
-              md={7} 
-              component={Paper} 
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Box 
+            sx={{ 
+              height: '100vh', 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center' 
+            }}
+          >
+            <Paper 
               elevation={6} 
-              square
-              sx={{
-                padding: '20px',
-                maxWidth: '600px',
-                width: '100%',
+              sx={{ 
+                padding: '20px', 
+                maxWidth: '600px', 
+                width: '100%' 
               }}
             >
-              <Box
+                <Box
                 sx={{
                   my: 8,
                   mx: 4, 
@@ -93,6 +92,8 @@ export default function Login() {
                       autoComplete="current-password"
                     />
                     <Button
+                      component={Link}
+                      to='/'
                       type="submit"
                       variant="contained"
                       startIcon={<LoginIcon />}
@@ -106,9 +107,8 @@ export default function Login() {
                     </Button>
                 </Box>
               </Box>
-            </Grid2>
-          </Grid2>
-          </ThemeProvider>
-        </>
+            </Paper>
+          </Box>
+        </ThemeProvider>
     )
 }
