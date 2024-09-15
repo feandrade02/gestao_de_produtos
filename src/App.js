@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Login from './components/pages/Login';
-import PaginaBase from './components/PaginaBase'
+import PaginaBase from './components/pages/PaginaBase'
 
 function App() {
   return (

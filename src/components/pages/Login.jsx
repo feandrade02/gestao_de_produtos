@@ -2,13 +2,14 @@ import React from 'react';
 import { Button, CssBaseline, TextField, Paper, Box, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LoginIcon from '@mui/icons-material/Login';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Logo from '../../img/logo_teste.png'
 
 const theme = createTheme();
 
 export default function Login() {
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,6 +18,7 @@ export default function Login() {
           email: data.get('email'),
           password: data.get('password'),
         });
+        navigate('/paginabase');
       };
 
     return(
@@ -92,8 +94,6 @@ export default function Login() {
                       autoComplete="current-password"
                     />
                     <Button
-                      component={Link}
-                      to='/'
                       type="submit"
                       variant="contained"
                       startIcon={<LoginIcon />}
