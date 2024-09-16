@@ -1,21 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, IconButton, Box, Drawer, CssBaseline, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Typography, Tooltip, Avatar } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Box, Drawer, CssBaseline, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Typography, Tooltip, Avatar, Collapse } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import LayersIcon from '@mui/icons-material/Layers';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 import Logo from '../../img/logo_teste.png';
 
 const drawerWidth = 240;
 
 const settings = ['Profile', 'Account', 'Logout'];
-const options = ['Dashboard', 'Sistema de Gestão', 'Parâmetros'];
+
+const menuItems = [
+  { text: 'Dashboard', icon: <HomeIcon /> },
+  {
+    text: 'Sistema de Gestão',
+    icon: <LayersIcon />,
+    subItems: [
+      { text: 'subItem1'},
+      { text: 'subItem2'},
+    ],
+  },
+  { 
+    text: 'Parâmetros', 
+    icon: <SettingsIcon />,
+    subItems: [
+      {text: 'Gestão de Campos'}, //acrescentar paths depois
+      {text: 'Informações de Mercadoria e Obrigatoriedade'},
+      {text: 'Gestão de Fornecedores'},
+      {text: 'Gestão de Usuários'},
+    ],
+  },
+];
 
 export default function Layout({ children }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [openSubMenu, setOpenSubMenu] = useState({});
+
   const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
@@ -34,6 +59,32 @@ export default function Layout({ children }) {
       console.log(`Clicked on ${setting}`);
     }
   };
+
+  const handleSubMenuToggle = (text) => {
+    setOpenSubMenu((prevState) => ({ ...prevState, [text]: !prevState[text] }));
+  };
+
+  const renderMenuItem = (item) => (
+    <ListItem key={item.text} disablePadding>
+      <ListItemButton onClick={() => item.subItems ? handleSubMenuToggle(item.text) : navigate(item.path)}>
+        <ListItemIcon>{item.icon}</ListItemIcon>
+        <ListItemText primary={item.text} />
+        {item.subItems && (openSubMenu[item.text] ? <ExpandLess /> : <ExpandMore />)}
+      </ListItemButton>
+    </ListItem>
+  );
+  
+  const renderSubItems = (subItems, parentText) => (
+    <Collapse in={openSubMenu[parentText]} timeout="auto" unmountOnExit>
+      <List component="div" disablePadding>
+        {subItems.map((subItem) => (
+          <ListItemButton key={subItem.text} sx={{ pl: 4 }} onClick={() => navigate(subItem.path)}>
+            <ListItemText primary={subItem.text} />
+          </ListItemButton>
+        ))}
+      </List>
+    </Collapse>
+  );
 
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
@@ -101,19 +152,11 @@ export default function Layout({ children }) {
         }}
       >
         <List>
-          {options.map((text) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {
-                    (text === 'Dashboard' && <HomeIcon />) ||
-                    (text === 'Sistema de Gestão' && <LayersIcon />) ||
-                    (text === 'Parâmetros' && <SettingsIcon />)
-                  }
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
+          {menuItems.map((item) => (
+            <React.Fragment key={item.text}>
+              {renderMenuItem(item)}
+              {item.subItems && renderSubItems(item.subItems, item.text)}
+            </React.Fragment>
           ))}
         </List>
       </Drawer>
