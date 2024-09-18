@@ -8,10 +8,12 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import CircleIcon from '@mui/icons-material/Circle';
+
 
 import Logo from '../../img/logo_teste.png';
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const settings = ['Profile', 'Account', 'Logout'];
 
@@ -29,7 +31,7 @@ const menuItems = [
     text: 'Parâmetros', 
     icon: <SettingsIcon />,
     subItems: [
-      {text: 'Gestão de Campos'}, //acrescentar paths depois
+      {text: 'Gestão de Campos', path: '/gestaocampos'}, //acrescentar paths depois
       {text: 'Informações de Mercadoria e Obrigatoriedade'},
       {text: 'Gestão de Fornecedores'},
       {text: 'Gestão de Usuários'},
@@ -37,7 +39,7 @@ const menuItems = [
   },
 ];
 
-export default function Layout({ children }) {
+export default function PaginaBase({ children }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openSubMenu, setOpenSubMenu] = useState({});
 
@@ -79,6 +81,9 @@ export default function Layout({ children }) {
       <List component="div" disablePadding>
         {subItems.map((subItem) => (
           <ListItemButton key={subItem.text} sx={{ pl: 4 }} onClick={() => navigate(subItem.path)}>
+            <ListItemIcon sx={{ minWidth: '15px' }}>
+              <CircleIcon sx={{ fontSize: 6 }} />
+            </ListItemIcon>
             <ListItemText primary={subItem.text} />
           </ListItemButton>
         ))}
@@ -169,7 +174,6 @@ export default function Layout({ children }) {
         }}
       >
         {children}
-        Conteúdo da página
       </Box>
     </Box>
   );

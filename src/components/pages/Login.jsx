@@ -18,7 +18,7 @@ export default function Login() {
           email: data.get('email'),
           password: data.get('password'),
         });
-        navigate('/paginabase');
+        navigate('/gestaocampos');
       };
 
     return(
