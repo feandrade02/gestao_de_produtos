@@ -40,13 +40,15 @@ const menuItems = [
 ];
 
 export default function PaginaBase({ children }) {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const [openSubMenu, setOpenSubMenu] = useState({});
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedSubItem, setSelectedSubItem] = useState(null);
 
   const navigate = useNavigate();
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+  const handleOpenUserMenu = (e) => {
+    setAnchorElUser(e.currentTarget);
   };
 
   const handleCloseUserMenu = () => {
@@ -62,13 +64,37 @@ export default function PaginaBase({ children }) {
     }
   };
 
+  const handleSideBarItemClick = (item) => {
+    setSelectedItem(item.text);
+    setSelectedSubItem(null);
+    item.subItems ? handleSubMenuToggle(item.text) : navigate(item.path);
+  }
+
+  const handleSubItemClick = (subitem, parentText) => {
+    setSelectedItem(parentText);
+    setSelectedSubItem(subitem.text);
+    navigate(subitem.path);
+  }
+
   const handleSubMenuToggle = (text) => {
     setOpenSubMenu((prevState) => ({ ...prevState, [text]: !prevState[text] }));
   };
 
   const renderMenuItem = (item) => (
-    <ListItem key={item.text} disablePadding>
-      <ListItemButton onClick={() => item.subItems ? handleSubMenuToggle(item.text) : navigate(item.path)}>
+    <ListItem 
+      key={item.text} 
+      disablePadding
+      sx={{
+        backgroundColor: selectedItem === item.text ? 'rgba(25, 118, 210)' : 'transparent',
+        color: selectedItem === item.text ? '#fff' : '#000',
+        '&:hover': {
+          backgroundColor: selectedItem === item.text ? 'rgba(25, 118, 210, 2.5)' : 'rgba(0, 0, 0, 0.14)'
+        }
+      }}
+    >
+      <ListItemButton 
+        onClick={() => handleSideBarItemClick(item)}
+      >
         <ListItemIcon>{item.icon}</ListItemIcon>
         <ListItemText primary={item.text} />
         {item.subItems && (openSubMenu[item.text] ? <ExpandLess /> : <ExpandMore />)}
@@ -80,7 +106,13 @@ export default function PaginaBase({ children }) {
     <Collapse in={openSubMenu[parentText]} timeout="auto" unmountOnExit>
       <List component="div" disablePadding>
         {subItems.map((subItem) => (
-          <ListItemButton key={subItem.text} sx={{ pl: 4 }} onClick={() => navigate(subItem.path)}>
+          <ListItemButton 
+            key={subItem.text} 
+            sx={{ pl: 4,
+               color: selectedSubItem === subItem.text ? 'rgb(25, 118, 210)' : '#000',
+             }} 
+            onClick={() => handleSubItemClick(subItem, parentText)}
+          >
             <ListItemIcon sx={{ minWidth: '15px' }}>
               <CircleIcon sx={{ fontSize: 6 }} />
             </ListItemIcon>
