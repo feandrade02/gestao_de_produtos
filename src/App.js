@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Login />} />
-        <Route path='/gestaocampos' element={<GestaoCampos />} />
+        <Route path='/gestaocampos' element={<GestaoCampos titulo="Parâmetros" subtitulo="Gestão de Campos" />} />
       </Routes>
     </Router>
   );
