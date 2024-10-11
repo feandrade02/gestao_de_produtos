@@ -15,7 +15,7 @@ import Logo from '../../img/logo_teste.png';
 
 const drawerWidth = 300;
 
-const settings = ['Profile', 'Account', 'Logout'];
+const settings = ['Perfil', 'Conta', 'Sair'];
 
 const menuItems = [
   { text: 'Dashboard', icon: <HomeIcon /> },
@@ -145,7 +145,7 @@ export default function PaginaBase({ children }) {
           />
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Abrir configurações">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/" />
               </IconButton>

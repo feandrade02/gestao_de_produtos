@@ -103,7 +103,7 @@ export default function Login() {
                         mx: 'auto' 
                       }}
                     >
-                      Login
+                      Entrar
                     </Button>
                 </Box>
               </Box>
