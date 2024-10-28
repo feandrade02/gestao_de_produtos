@@ -71,53 +71,50 @@ export default function Acao() {
     <Box>
       <TituloTab titulo="Gestão de Campos" subtitulo="Ação" />
 
-      <Box sx={{ width: '100%', maxWidth: '90%', margin: '0' }}>
-        
-        <BarraFiltro
-          fields={[
-            { name: 'acao', label: 'Ação' }
-          ]}
-          onFilter={handleFilter} 
-          onClear={handleClear}
-          onDownload={exportToExcel}
-        />
+      <BarraFiltro
+        fields={[
+          { name: 'acao', label: 'Ação' }
+        ]}
+        onFilter={handleFilter} 
+        onClear={handleClear}
+        onDownload={exportToExcel}
+      />
 
-        <DataGrid
-            sx={{
-              marginTop: '20px',  
-              "& .MuiDataGrid-menuIcon": {
-                display: "none",
+      <DataGrid
+          sx={{
+            marginTop: '20px',  
+            "& .MuiDataGrid-menuIcon": {
+              display: "none",
+            },
+            "& .header-align-right .MuiDataGrid-columnHeaderTitleContainer": {
+              display: 'flex',
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+            },
+            "& .header-align-right .MuiDataGrid-columnHeaderTitleContainer span": {
+              flexGrow: 1,
+              textAlign: 'center',
+            },
+            "& .header-align-right .MuiDataGrid-columnHeaderTitleContainer::before": {
+              content: '""',
+              width: '24px',
+              height: '1px',
+              visibility: 'hidden',
+            }
+          }}
+          rows={filteredRows}
+          columns={columns}
+          // pageSize={5}
+          localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}  
+          initialState={{
+              pagination: {
+                  paginationModel: {
+                      pageSize: 5,
+                  },
               },
-              "& .header-align-right .MuiDataGrid-columnHeaderTitleContainer": {
-                display: 'flex',
-                justifyContent: 'space-between', 
-                alignItems: 'center',
-              },
-              "& .header-align-right .MuiDataGrid-columnHeaderTitleContainer span": {
-                flexGrow: 1,
-                textAlign: 'center',
-              },
-              "& .header-align-right .MuiDataGrid-columnHeaderTitleContainer::before": {
-                content: '""',
-                width: '24px',
-                height: '1px',
-                visibility: 'hidden',
-              }
-            }}
-            rows={filteredRows}
-            columns={columns}
-            // pageSize={5}
-            localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}  
-            initialState={{
-                pagination: {
-                    paginationModel: {
-                        pageSize: 5,
-                    },
-                },
-            }}
-            pageSizeOptions={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        />
-      </Box>
+          }}
+          pageSizeOptions={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+      />
     </Box>
   );
 }

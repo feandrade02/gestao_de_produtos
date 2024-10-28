@@ -128,7 +128,7 @@ export default function PaginaBase({ children }) {
   );
 
   return (
-    <Box sx={{ display: 'flex', height: '100vh' }}>
+    <Box sx={{ display: 'flex'}}>
       <CssBaseline />
 
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
@@ -209,7 +209,6 @@ export default function PaginaBase({ children }) {
         component="main"
         sx={{
           mt: '64px',
-          flexGrow: 1,
           transition: 'width 0.3s'
         }}
       >

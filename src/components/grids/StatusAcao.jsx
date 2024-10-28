@@ -86,7 +86,7 @@ export default function Servico() {
         <Box>
             <TituloTab titulo="Gestão de Campos" subtitulo="Status Ação" />
 
-            <Box sx={{ width: '100%', maxWidth: '90%', margin: '0' }}>
+            <Box sx={{ width: '100%', maxWidth: '95%', margin: '0' }}>
 
             <BarraFiltro 
                 fields={[
