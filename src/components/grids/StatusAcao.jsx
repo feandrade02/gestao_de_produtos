@@ -11,7 +11,7 @@ const columns = [
     { 
       field: 'statusAcao',
       headerName: 'Status da Ação', 
-      width: 400,
+      flex: 1,
       align: 'left',
       headerAlign: 'center', 
       headerClassName: 'header-align-right'
@@ -19,7 +19,7 @@ const columns = [
     {
       field: 'rotulo',
       headerName: 'Rótulo',
-      width: 400,
+      flex: 1,
       editable: true,
       align: 'center',
       headerAlign: 'center',
@@ -28,7 +28,7 @@ const columns = [
     {
       field: 'dataDesativacao',
       headerName: 'Data de Desativação',
-      width: 400,
+      flex: 1,
       editable: true,
       align: 'center',
       headerAlign: 'center',
@@ -36,17 +36,17 @@ const columns = [
     },
   ];
 
-  const rows = [
-    { id: 1, statusAcao: 'Pendente/Catálogo', rotulo: '', dataDesativacao: '-' },
-    { id: 2, statusAcao: 'Pendente/Comprador', rotulo: '', dataDesativacao: '-' },
-    { id: 3, statusAcao: 'Pendente/Marca Própria', rotulo: '', dataDesativacao: '-' },
-    { id: 4, statusAcao: 'Pendente/Fornecedor', rotulo: '', dataDesativacao: '-' },
-    { id: 5, statusAcao: 'Em Andamento', rotulo: '', dataDesativacao: '-' },
-    { id: 6, statusAcao: 'Concluída', rotulo: '', dataDesativacao: '-' },
-    { id: 7, statusAcao: 'Cancelada', rotulo: '', dataDesativacao: '-' }
-  ];
+const rows = [
+  { id: 1, statusAcao: 'Pendente/Catálogo', rotulo: '', dataDesativacao: '-' },
+  { id: 2, statusAcao: 'Pendente/Comprador', rotulo: '', dataDesativacao: '-' },
+  { id: 3, statusAcao: 'Pendente/Marca Própria', rotulo: '', dataDesativacao: '-' },
+  { id: 4, statusAcao: 'Pendente/Fornecedor', rotulo: '', dataDesativacao: '-' },
+  { id: 5, statusAcao: 'Em Andamento', rotulo: '', dataDesativacao: '-' },
+  { id: 6, statusAcao: 'Concluída', rotulo: '', dataDesativacao: '-' },
+  { id: 7, statusAcao: 'Cancelada', rotulo: '', dataDesativacao: '-' }
+];
 
-  // Função para converter e baixar os dados em um arquivo Excel
+// Função para converter e baixar os dados em um arquivo Excel
 const exportToExcel = () => {
   const worksheet = XLSX.utils.json_to_sheet(rows);
   const workbook = XLSX.utils.book_new();
@@ -86,7 +86,7 @@ export default function Servico() {
         <Box>
             <TituloTab titulo="Gestão de Campos" subtitulo="Status Ação" />
 
-            <Box sx={{ width: '100%', maxWidth: '1210px', margin: '0' }}>
+            <Box sx={{ width: '100%', maxWidth: '90%', margin: '0' }}>
 
             <BarraFiltro 
                 fields={[

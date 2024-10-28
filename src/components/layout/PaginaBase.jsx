@@ -40,6 +40,7 @@ const menuItems = [
 ];
 
 export default function PaginaBase({ children }) {
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [openSubMenu, setOpenSubMenu] = useState({});
   const [selectedItem, setSelectedItem] = useState(null);
@@ -66,7 +67,6 @@ export default function PaginaBase({ children }) {
 
   const handleSideBarItemClick = (item) => {
     setSelectedItem(item.text);
-    setSelectedSubItem(null);
     item.subItems ? handleSubMenuToggle(item.text) : navigate(item.path);
   }
 
@@ -78,6 +78,10 @@ export default function PaginaBase({ children }) {
 
   const handleSubMenuToggle = (text) => {
     setOpenSubMenu((prevState) => ({ ...prevState, [text]: !prevState[text] }));
+  };
+  
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
   };
 
   const renderMenuItem = (item) => (
@@ -133,6 +137,7 @@ export default function PaginaBase({ children }) {
             edge="start"
             color="inherit"
             aria-label="menu"
+            onClick={toggleDrawer}
             sx={{ mr: 2 }}
           >
             <MenuIcon />
@@ -177,12 +182,14 @@ export default function PaginaBase({ children }) {
       </AppBar>
 
       <Drawer
-        variant="permanent"
+        variant="persistent"
+        open={drawerOpen}
         sx={{
-          width: drawerWidth,
+          width: drawerOpen ? drawerWidth : 0,
           flexShrink: 0,
+          transition: 'width 0.3s',
           [`& .MuiDrawer-paper`]: { 
-            width: drawerWidth, 
+            width: drawerOpen ? drawerWidth : 0, 
             boxSizing: 'border-box',
             top: '64px',
           },
@@ -203,6 +210,7 @@ export default function PaginaBase({ children }) {
         sx={{
           mt: '64px',
           flexGrow: 1,
+          transition: 'width 0.3s'
         }}
       >
         {children}

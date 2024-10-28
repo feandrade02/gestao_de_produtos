@@ -11,7 +11,7 @@ const columns = [
     { 
       field: 'prioridade',
       headerName: 'Prioridade', 
-      width: 400,
+      flex: 1,
       align: 'right',
       headerAlign: 'center', 
       headerClassName: 'header-align-right'
@@ -19,7 +19,7 @@ const columns = [
     {
       field: 'servico',
       headerName: 'Serviço',
-      width: 400,
+      flex: 1,
       editable: true,
       align: 'left',
       headerAlign: 'center',
@@ -28,7 +28,7 @@ const columns = [
     {
       field: 'dataDesativacao',
       headerName: 'Data de Desativação',
-      width: 400,
+      flex: 1,
       editable: true,
       align: 'center',
       headerAlign: 'center',
@@ -84,7 +84,7 @@ export default function Servico() {
         <Box>
             <TituloTab titulo="Gestão de Campos" subtitulo="Serviço" />
 
-            <Box sx={{ width: '100%', maxWidth: '1210px', margin: '0' }}>
+            <Box sx={{ width: '100%', maxWidth: '90%', margin: '0' }}>
 
               <BarraFiltro 
                 fields={[

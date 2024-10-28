@@ -31,7 +31,7 @@ export default function FiltroTabela({ fields, onFilter, onClear, onDownload }) 
       {fields.map((field) => (
         <TextField
             sx={{
-                width:'40%'
+                flex: 1
             }}
             key={field.name}
             label={field.label}
@@ -67,8 +67,9 @@ export default function FiltroTabela({ fields, onFilter, onClear, onDownload }) 
         variant="outlined" 
         color="primary"
         onClick={onDownload}
+        startIcon={<DownloadIcon />}
       >
-        <DownloadIcon />
+        Download
       </Button>
     </Box>
   );
